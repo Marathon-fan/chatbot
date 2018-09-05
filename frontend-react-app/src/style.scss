@@ -1,0 +1,24 @@
+.container {
+    margin: auto;
+    text-align: center;
+    max-width: 600px;
+
+    &__image {
+        width: 100px;
+        height: auto;
+    }
+}
+
+.header {
+    width: 500px;
+    text-align: header;
+    align-content: flex-start;
+    display: flex;
+}
+
+
+.headerItem {
+    justify-content: flex-end ;
+    align-content: flex-start ;
+    width: 33%
+}

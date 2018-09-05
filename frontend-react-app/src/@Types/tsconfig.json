@@ -1,0 +1,5 @@
+  "typeRoots": [
+            "../node_modules/@types",
+            "../@types",
+            "../node_modules/react-simple-chatbot/dist"
+        ]
