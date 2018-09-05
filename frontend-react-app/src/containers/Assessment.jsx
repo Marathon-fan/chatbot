@@ -49,9 +49,6 @@ class Assessment extends Component {
                     <div>Today at 5:42PM</div>
                   </Comment.Metadata>
                   <Comment.Text>How artistic!</Comment.Text>
-                  <Comment.Actions>
-                    <Comment.Action>Reply</Comment.Action>
-                  </Comment.Actions>
                 </Comment.Content>
                 <br/>
              </Comment>
@@ -64,9 +61,6 @@ class Assessment extends Component {
                   <div>5 days ago</div>
                 </Comment.Metadata>
                 <Comment.Text>Dude, this is awesome. Thanks so much</Comment.Text>
-                <Comment.Actions>
-                  <Comment.Action>Reply</Comment.Action>
-                </Comment.Actions>
               </Comment.Content>
               <br/>
             </Comment>
