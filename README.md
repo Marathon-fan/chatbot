@@ -1,44 +1,17 @@
 
 
-install chat bot
+how to use it?
 
+step1:
 ```sh
-pip install chatterbot
-pip install flask-restful
-
-pip install Flask
+cd backend-flask and install backend
 ```
 
-
-
-django-bot-server-tutorial
-
-
-install sqlite
+step2:
 ```sh
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null 2> /dev/null
-
-brew install sqlite
+cd frontend-react-app and install frontend
 ```
 
-
-```sh
-sudo pip install virtualenv
-
-virtualenv chatbot
-
-cd chatbot
-source bin/activate
-
-```
-
-```sh
-sudo pip install -r requirements.txt
-
-python3 manage.py migrate --run-syncdb
-
-python3 manage.py runserver
-```
-
-navigate to localhost:8000/chat/
+step3:   
+start to use the mini-chat system(for Medius)
 
