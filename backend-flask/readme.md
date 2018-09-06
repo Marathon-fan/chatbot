@@ -17,8 +17,6 @@ sudo pip install virtualenv
 
 virtualenv chatbot
 
-cd chatbot
-source bin/activate
 ```
 
 install sqlite
