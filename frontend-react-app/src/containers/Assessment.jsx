@@ -1,35 +1,51 @@
 import React,  { Component }from 'react';
 
 import { Button, Comment,  Form, Header  } from 'semantic-ui-react'
+import moment from 'moment';
+
+const nocache = require('superagent-no-cache');
+const request = require('superagent');
 
 class Assessment extends Component {
 
   constructor() {
     super();
-
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.state = {
-      steps: [
-        {
-          id: '0',
-          message: 'Welcome to react chatbot!',
-          trigger: '1',
-        },
-        {
-          id: '1',
-          message: 'Bye!',
-          end: true,
-        },
-      ]
+      serverMsg: 'Thanks for choosing Medius!',
+      userMsg: 'Let me ask you something',
+      textArea: 'Please in your question'
   };
 }
 
-  componentWillMount() {
-    this.setState()
-  };
 
-  // handleNewUserMessage = (newMessage) => {
-  //   console.log(`New message incomig! ${newMessage}`);
-  // }
+  handleSubmit(event) {
+    const data = new FormData(event.target);
+  }
+ 
+  handleChangeTextArea(event) {
+    this.setState({ textArea: event.target.value });
+  }  
+
+  updateAnswer(question) {
+    request
+    .post('http://localhost:5000/chatbot/01')
+    .query({ message: question}) // query string
+    .use(nocache) // Prevents caching of *only* this request
+    .end((err, res) => {
+      // Do something
+      const newState = Object.assign({}, this.state, {
+        serverMsg: res.text
+      });
+      this.setState(newState);     
+    });
+  }
+
+  handleChangeButton(event) {
+    this.setState({ userMsg: this.state.textArea });
+    this.updateAnswer(this.state.userMsg);
+    this.forceUpdate();
+  }
 
   render() {
     return(
@@ -44,11 +60,11 @@ class Assessment extends Component {
                 <Comment.Avatar src='https://s33.postimg.cc/6izv3nkm7/smart.png' />
                 </div>
                 <Comment.Content>
-                  <Comment.Author as='a'>Matt</Comment.Author>
+                  <Comment.Author as='a'>Medius</Comment.Author>
                   <Comment.Metadata>
-                    <div>Today at 5:42PM</div>
+                    <div>{ (new moment()).format()}</div>
                   </Comment.Metadata>
-                  <Comment.Text>How artistic!</Comment.Text>
+                  <Comment.Text>{this.state.serverMsg}</Comment.Text>
                 </Comment.Content>
                 <br/>
              </Comment>
@@ -56,25 +72,23 @@ class Assessment extends Component {
             <Comment>
               <Comment.Avatar src='https://s33.postimg.cc/6hpxaidq7/user.png' />
               <Comment.Content>
-                <Comment.Author as='a'>Joe Henderson</Comment.Author>
+                <Comment.Author as='a'>User</Comment.Author>
                 <Comment.Metadata>
-                  <div>5 days ago</div>
+                  <div>{ (new moment()).format()}</div>
                 </Comment.Metadata>
-                <Comment.Text>Dude, this is awesome. Thanks so much</Comment.Text>
+                <Comment.Text>{this.state.userMsg}</Comment.Text>
               </Comment.Content>
               <br/>
             </Comment>
 
-            <Form reply>
-              <Form.TextArea />
-              <Button content='Add Reply' labelPosition='left' icon='edit' primary />
+            <Form reply onSubmit={this.handleSubmit} >
+              <Form.TextArea id="textArea" placeholder="Please input your question" onChange={event => this.handleChangeTextArea(event)} />
+              <Button id='formButton' content='Answer question' labelPosition='left' icon='edit' primary onClick={event => this.handleChangeButton(event)}/>
             </Form>
-
           </Comment.Group>
         </div>
     );
   };
-
 };
 
 export default Assessment;

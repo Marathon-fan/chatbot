@@ -4,12 +4,16 @@ Run RESTful Flask server to receive requests from client
 
 from flask import Flask, request
 from flask_restful import Api, Resource, reqparse
+from flask_cors import CORS
+from flask_restful import reqparse
 
 from bot import bot
 
 app = Flask(__name__)
+CORS(app)
 api = Api(app)
 
+@app.route("/")
 class Res(Resource):
 
     def get(self, uid):
@@ -18,13 +22,11 @@ class Res(Resource):
     def post(self, uid):
         print('-----debug-----')
         print(self)
-        print(uid)
-        print(request)
-        print(request.data)
-        inputDict = request.json
-        userChatInfo = inputDict.get("message")
+        print(uid)    
+        userChatInfo = request.args.get("message")
         print(userChatInfo)
         response = bot.get_response(userChatInfo)
+        print(response)
         if response.confidence < 0.5:
             return "I am not trained to respond to statements like these."
         return str(response)
@@ -36,4 +38,9 @@ class Res(Resource):
         pass
 
 api.add_resource(Res, "/chatbot/<string:uid>")
-app.run(host='0.0.0.0', debug=True) # remove debug=True when finally deploying
+
+
+if __name__ == "__main__":
+    app.run()
+
+#app.run(host='0.0.0.0', debug=True) # remove debug=True when finally deploying
