@@ -20,13 +20,13 @@ input your question and click "answer question" button
 ## snapshots  
 
 initial  
-![initial](./frontend-react-app/pics/initial.png)
+![initial](./frontend-react-app/pics/initial.jpg)
 
 
 sample question1 and answer.  
-![initial](./frontend-react-app/pics/q1.png)
+![sample question1 and answer.](./frontend-react-app/pics/q1.jpg)
 
 
 sample question2 and answer.  
-![initial](./frontend-react-app/pics/q2.png)
+![sample question2 and answer.  ](./frontend-react-app/pics/q2.jpg)
 
